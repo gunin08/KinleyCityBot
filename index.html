@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Project Showcase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #121014;
+        --paper: #f8f4ee;
+        --accent: #0f7b6c;
+        --accent-2: #ff6b4a;
+        --muted: #6b6b73;
+        --card: rgba(255, 255, 255, 0.7);
+        --shadow: 0 30px 60px rgba(18, 16, 20, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Space Grotesk", system-ui, sans-serif;
+        color: var(--ink);
+        background: radial-gradient(
+            circle at 10% 20%,
+            rgba(255, 107, 74, 0.25),
+            transparent 45%
+          ),
+          radial-gradient(
+            circle at 85% 5%,
+            rgba(15, 123, 108, 0.2),
+            transparent 50%
+          ),
+          linear-gradient(135deg, #f8f4ee 0%, #f0ebe4 100%);
+      }
+
+      .page {
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+        padding: 48px 24px 80px;
+      }
+
+      header {
+        display: grid;
+        gap: 24px;
+        align-items: center;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 16px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(18, 16, 20, 0.1);
+        font-size: 14px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .title {
+        font-family: "Fraunces", serif;
+        font-size: clamp(2.8rem, 5vw, 4.4rem);
+        margin: 0;
+        line-height: 1.05;
+      }
+
+      .subtitle {
+        font-size: 1.05rem;
+        color: var(--muted);
+        max-width: 34rem;
+      }
+
+      .hero-card {
+        border-radius: 32px;
+        background: var(--card);
+        padding: 32px;
+        backdrop-filter: blur(14px);
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(18, 16, 20, 0.08);
+        display: grid;
+        gap: 20px;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .button {
+        text-decoration: none;
+        padding: 12px 20px;
+        border-radius: 999px;
+        font-weight: 600;
+        background: var(--ink);
+        color: #fff;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .button.secondary {
+        background: transparent;
+        color: var(--ink);
+        border: 1px solid rgba(18, 16, 20, 0.2);
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px rgba(18, 16, 20, 0.15);
+      }
+
+      .grid {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .panel {
+        padding: 24px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(18, 16, 20, 0.08);
+        box-shadow: 0 20px 30px rgba(18, 16, 20, 0.08);
+        min-height: 180px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .panel h3 {
+        margin: 0;
+        font-size: 1.2rem;
+      }
+
+      .panel p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      footer {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      @media (max-width: 640px) {
+        .page {
+          padding-top: 32px;
+        }
+
+        .hero-card {
+          padding: 24px;
+        }
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(12px);
+        animation: reveal 0.9s ease forwards;
+      }
+
+      .reveal.delay-1 {
+        animation-delay: 0.2s;
+      }
+
+      .reveal.delay-2 {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes reveal {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header>
+        <div class="reveal">
+          <span class="badge">Project Showcase</span>
+          <h1 class="title">Replace this title with your project name.</h1>
+          <p class="subtitle">
+            A short, punchy description that explains what the project does and
+            why it matters. Keep it to 1–2 sentences.
+          </p>
+          <div class="actions">
+            <a class="button" href="#">Live Demo</a>
+            <a class="button secondary" href="#">Source Code</a>
+          </div>
+        </div>
+        <div class="hero-card reveal delay-1">
+          <strong>Hero Area</strong>
+          <p>
+            Drop a screenshot, mockup, or gif here. For now, use this space to
+            outline what the user should notice first.
+          </p>
+          <div class="grid">
+            <div class="panel">
+              <h3>Problem</h3>
+              <p>What pain point sparked the build?</p>
+            </div>
+            <div class="panel">
+              <h3>Solution</h3>
+              <p>How does your project solve it?</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="grid reveal delay-2">
+        <div class="panel">
+          <h3>Key Feature One</h3>
+          <p>Explain the most impressive capability in one sentence.</p>
+        </div>
+        <div class="panel">
+          <h3>Key Feature Two</h3>
+          <p>Highlight performance, speed, or uniqueness here.</p>
+        </div>
+        <div class="panel">
+          <h3>Key Feature Three</h3>
+          <p>Finish with something measurable or delightful.</p>
+        </div>
+      </section>
+
+      <footer>
+        <span>Built by You — 2024</span>
+        <span>Replace with contact or socials</span>
+      </footer>
+    </main>
+  </body>
+</html>
