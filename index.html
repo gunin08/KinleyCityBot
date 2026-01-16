@@ -293,6 +293,21 @@
   }
   .pill strong{ display:block; font-size: 14px; margin-bottom: 6px; }
   .pill span{ font-size: 13px; color: rgba(255,255,255,.65); }
+  .contact-pill{
+    display:flex;
+    align-items:center;
+    gap: 14px;
+    padding: 14px;
+  }
+  .contact-pill img{
+    width: 96px;
+    height: 96px;
+    border-radius: 18px;
+    object-fit: cover;
+    border: 1px solid rgba(255,255,255,.2);
+  }
+  .contact-pill strong{ font-size: 16px; margin-bottom: 4px; }
+  .contact-pill span{ font-size: 13px; }
 
   /* Testimonials marquee */
   .marquee{
@@ -484,6 +499,7 @@
         <div class="pill"><strong>Multilingual</strong><span>EN/FR/HI/ES and more.</span></div>
         <div class="pill"><strong>Knowledge Base Driven</strong><span>Approved sources only.</span></div>
         <div class="pill"><strong>Analytics Funnel</strong><span>Trends + pain points.</span></div>
+        <div class="pill"><strong>Concurrent Call Handling</strong><span>Scales across multiple callers.</span></div>
         <div class="pill"><strong>After-hours Coverage</strong><span>Evenings/weekends.</span></div>
         <div class="pill"><strong>Consistent Answers</strong><span>Reduced variance.</span></div>
         <div class="pill"><strong>Secure Storage</strong><span>Audio + transcript.</span></div>
@@ -527,12 +543,20 @@
             <div class="vid-label">French</div>
           </div>
           <div class="tVidCard">
-            <div class="tVid placeholder">Empty</div>
-            <div class="vid-label">Empty</div>
+            <div class="tVid">
+              <video class="tv" controls playsinline preload="metadata">
+                <source src="spanish.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="vid-label">Spanish</div>
           </div>
           <div class="tVidCard">
-            <div class="tVid placeholder">Empty</div>
-            <div class="vid-label">Empty</div>
+            <div class="tVid">
+              <video class="tv" controls playsinline preload="metadata">
+                <source src="hindi.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="vid-label">Hindi</div>
           </div>
         </div>
       </div>
@@ -543,26 +567,32 @@
   <div class="kicker">Contacts</div>
 
   <div class="row2" style="margin-top:12px;">
-    <div class="pill">
-      <strong>Niket Kakkar</strong>
-      <span>
-        <a href="https://www.linkedin.com/in/niketkakkar/"
-           target="_blank" rel="noopener noreferrer"
-           style="color:rgba(255,255,255,.85);text-decoration:none;">
-          LinkedIn
-        </a>
-      </span>
+    <div class="pill contact-pill">
+      <img src="niket.jpg" alt="Niket Kakkar" />
+      <div>
+        <strong>Niket Kakkar</strong>
+        <span>
+          <a href="https://www.linkedin.com/in/niketkakkar/"
+             target="_blank" rel="noopener noreferrer"
+             style="color:rgba(255,255,255,.85);text-decoration:none;">
+            LinkedIn
+          </a>
+        </span>
+      </div>
     </div>
 
-    <div class="pill">
-      <strong>Gunin Singh</strong>
-      <span>
-        <a href="https://www.linkedin.com/in/gunin-singh-415426226/"
-           target="_blank" rel="noopener noreferrer"
-           style="color:rgba(255,255,255,.85);text-decoration:none;">
-          LinkedIn
-        </a>
-      </span>
+    <div class="pill contact-pill">
+      <img src="gunin.jpg" alt="Gunin Singh" />
+      <div>
+        <strong>Gunin Singh</strong>
+        <span>
+          <a href="https://www.linkedin.com/in/gunin-singh-415426226/"
+             target="_blank" rel="noopener noreferrer"
+             style="color:rgba(255,255,255,.85);text-decoration:none;">
+            LinkedIn
+          </a>
+        </span>
+      </div>
     </div>
 
     
