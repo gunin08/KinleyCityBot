@@ -1,249 +1,528 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Project Showcase</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        --ink: #121014;
-        --paper: #f8f4ee;
-        --accent: #0f7b6c;
-        --accent-2: #ff6b4a;
-        --muted: #6b6b73;
-        --card: rgba(255, 255, 255, 0.7);
-        --shadow: 0 30px 60px rgba(18, 16, 20, 0.12);
-      }
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Project Showcase</title>
 
-      * {
-        box-sizing: border-box;
-      }
+<style>
+  :root{
+    --bg0:#131416;
+    --bg1:#141517;
 
-      body {
-        margin: 0;
-        min-height: 100vh;
-        font-family: "Space Grotesk", system-ui, sans-serif;
-        color: var(--ink);
-        background: radial-gradient(
-            circle at 10% 20%,
-            rgba(255, 107, 74, 0.25),
-            transparent 45%
-          ),
-          radial-gradient(
-            circle at 85% 5%,
-            rgba(15, 123, 108, 0.2),
-            transparent 50%
-          ),
-          linear-gradient(135deg, #f8f4ee 0%, #f0ebe4 100%);
-      }
+    --text:rgba(255,255,255,.92);
+    --muted:rgba(255,255,255,.68);
 
-      .page {
-        display: flex;
-        flex-direction: column;
-        gap: 48px;
-        padding: 48px 24px 80px;
-      }
+    --accent:#5188b4;
+    --stroke:rgba(255,255,255,.14);
 
-      header {
-        display: grid;
-        gap: 24px;
-        align-items: center;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      }
+    /* stronger “iOS glass” */
+    --glass: rgba(255,255,255,.06);
+    --glassHi: rgba(255,255,255,.11);
 
-      .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-        padding: 8px 16px;
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.7);
-        border: 1px solid rgba(18, 16, 20, 0.1);
-        font-size: 14px;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
+    --shadow: 0 26px 80px rgba(0,0,0,.60);
+    --shadowSoft: 0 16px 46px rgba(0,0,0,.48);
 
-      .title {
-        font-family: "Fraunces", serif;
-        font-size: clamp(2.8rem, 5vw, 4.4rem);
-        margin: 0;
-        line-height: 1.05;
-      }
+    --r: 20px;
+  }
 
-      .subtitle {
-        font-size: 1.05rem;
-        color: var(--muted);
-        max-width: 34rem;
-      }
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; }
+  body{
+    margin:0;
+    color:var(--text);
+    font: 16px/1.35 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background:
+      radial-gradient(1200px 700px at 60% 40%, rgba(35,55,95,.55), transparent 58%),
+      linear-gradient(180deg, var(--bg1), var(--bg0));
+    overflow-x:hidden;
+  }
 
-      .hero-card {
-        border-radius: 32px;
-        background: var(--card);
-        padding: 32px;
-        backdrop-filter: blur(14px);
-        box-shadow: var(--shadow);
-        border: 1px solid rgba(18, 16, 20, 0.08);
-        display: grid;
-        gap: 20px;
-      }
+  /* Rainbow speed lines + glow */
+  .bg{ position:fixed; inset:0; pointer-events:none; z-index:0; }
+  .bg::before{
+    content:"";
+    position:absolute; inset:-15%;
+    background:
+      radial-gradient(900px 600px at 20% 35%, rgba(81,136,180,.22), transparent 60%),
+      radial-gradient(720px 520px at 70% 30%, rgba(255,70,220,.10), transparent 65%),
+      radial-gradient(700px 540px at 75% 75%, rgba(255,190,90,.09), transparent 60%),
+      radial-gradient(900px 700px at 35% 85%, rgba(120,255,210,.08), transparent 62%);
+    filter: blur(12px);
+    opacity: .95;
+  }
+  .bg::after{
+    content:"";
+    position:absolute; inset:-35%;
+    background:
+      conic-gradient(from 210deg at 56% 44%,
+        transparent 0 9deg,
+        rgba(255,70,220,.22) 9deg 12deg,
+        transparent 12deg 20deg,
+        rgba(80,180,255,.26) 20deg 23deg,
+        transparent 23deg 36deg,
+        rgba(255,190,90,.18) 36deg 39deg,
+        transparent 39deg 52deg,
+        rgba(120,255,210,.16) 52deg 55deg,
+        transparent 55deg 360deg);
+    opacity:.55;
+    transform: rotate(-10deg);
+    mix-blend-mode: screen;
+  }
 
-      .actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-      }
+  .vignette{
+    position:fixed; inset:0; pointer-events:none; z-index:1;
+    background: radial-gradient(closest-side at 50% 40%,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,.25) 55%,
+      rgba(0,0,0,.62) 100%);
+  }
 
-      .button {
-        text-decoration: none;
-        padding: 12px 20px;
-        border-radius: 999px;
-        font-weight: 600;
-        background: var(--ink);
-        color: #fff;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-      }
+  /* FULL-WIDTH container */
+  .wrap{
+    position:relative;
+    z-index:2;
+    width: min(1600px, calc(100vw - 56px)); /* uses almost entire desktop */
+    margin: 0 auto;
+    padding: 22px 0 54px;
+  }
+  @media (max-width: 720px){
+    .wrap{ width: calc(100vw - 24px); }
+  }
 
-      .button.secondary {
-        background: transparent;
-        color: var(--ink);
-        border: 1px solid rgba(18, 16, 20, 0.2);
-      }
+  header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 10px 0 18px;
+    color: rgba(255,255,255,.74);
+  }
+  header .brand{ font-weight: 820; letter-spacing:.02em; }
+  header a{ color:inherit; text-decoration:none; }
+  .nav{ display:flex; gap:14px; align-items:center; }
+  .nav a{ opacity:.9; }
+  .nav a:hover{ opacity:1; }
 
-      .button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 24px rgba(18, 16, 20, 0.15);
-      }
+  /* “iOS glass” card */
+  .card{
+    position:relative;
+    background: var(--glass);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: var(--r);
+    box-shadow: var(--shadow);
+    overflow:hidden;
+  }
+  .card::before{
+    /* subtle top-left highlight sheen */
+    content:"";
+    position:absolute; inset:-1px;
+    background:
+      radial-gradient(600px 240px at 20% 20%, rgba(255,255,255,.10), transparent 60%),
+      radial-gradient(600px 240px at 80% 0%, rgba(81,136,180,.14), transparent 55%);
+    opacity:.8;
+    pointer-events:none;
+  }
+  .card > *{ position:relative; z-index:1; }
 
-      .grid {
-        display: grid;
-        gap: 20px;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      }
+  @supports ((-webkit-backdrop-filter: blur(14px)) or (backdrop-filter: blur(14px))){
+    .card{
+      background: rgba(255,255,255,.075);
+      -webkit-backdrop-filter: blur(22px) saturate(160%);
+      backdrop-filter: blur(22px) saturate(160%);
+    }
+  } /* Requires partial transparency to see blur through. */ /* [web:57] */
 
-      .panel {
-        padding: 24px;
-        border-radius: 20px;
-        background: rgba(255, 255, 255, 0.8);
-        border: 1px solid rgba(18, 16, 20, 0.08);
-        box-shadow: 0 20px 30px rgba(18, 16, 20, 0.08);
-        min-height: 180px;
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-      }
+  .pad{ padding: 18px; box-shadow: var(--shadowSoft); }
 
-      .panel h3 {
-        margin: 0;
-        font-size: 1.2rem;
-      }
+  /* HERO */
+  .hero{ padding: 26px; box-shadow: var(--shadowSoft); }
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    padding:7px 10px;
+    border-radius:999px;
+    border: 1px solid rgba(255,255,255,.16);
+    background: rgba(255,255,255,.06);
+    font-size:12px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color: rgba(255,255,255,.75);
+  }
+  h1{
+    margin: 12px 0 8px;
+    font-size: clamp(34px, 3.6vw, 60px);
+    line-height:1.06;
+    letter-spacing:-.02em;
+  }
+  .sub{
+    margin:0;
+    color: var(--muted);
+    max-width: 90ch;
+  }
 
-      .panel p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.5;
-      }
+  /* GRID ROWS: equal column sizing */
+  .row2{
+    margin-top: 16px;
+    display:grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    align-items: stretch;
+  }
+  .row3{
+    margin-top: 16px;
+    display:grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    align-items: stretch;
+  }
+  @media (max-width: 980px){
+    .row2, .row3{ grid-template-columns: 1fr; }
+  }
 
-      footer {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 12px;
-        font-size: 0.9rem;
-        color: var(--muted);
-      }
+  .kicker{
+    margin:0 0 6px;
+    color: rgba(255,255,255,.78);
+    font-size: 14px;
+    font-weight: 750;
+    letter-spacing:.01em;
+  }
+  .desc{
+    margin:0 0 12px;
+    color: var(--muted);
+    font-size: 14px;
+  }
 
-      @media (max-width: 640px) {
-        .page {
-          padding-top: 32px;
-        }
+  /* Buttons (only where needed, not in hero) */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    height: 42px;
+    padding: 0 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.16);
+    text-decoration:none;
+    font-weight: 720;
+    font-size: 14px;
+    color: var(--text);
+    background: rgba(255,255,255,.06);
+    transition: transform .12s ease, filter .12s ease;
+  }
+  .btn:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+  .btn:active{ transform: translateY(0px); }
+  .btn.primary{
+    background: rgba(255,255,255,.92);
+    color: #0d0f12;
+    border-color: rgba(255,255,255,.12);
+  }
 
-        .hero-card {
-          padding: 24px;
-        }
-      }
+  .audioBox{
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 14px;
+    background: rgba(0,0,0,.22);
+    padding: 12px;
+  }
+  audio{ width:100%; }
 
-      .reveal {
-        opacity: 0;
-        transform: translateY(12px);
-        animation: reveal 0.9s ease forwards;
-      }
+  /* Iframe container */
+  .frame{
+    border-radius: 16px;
+    overflow:hidden;
+    border: 1px solid rgba(255,255,255,.14);
+    background: rgba(0,0,0,.25);
+    aspect-ratio: 16/9;
+  }
+  .frame iframe{
+    width:100%;
+    height:100%;
+    border:0;
+    display:block;
+  }
 
-      .reveal.delay-1 {
-        animation-delay: 0.2s;
-      }
+  /* Key feature pills */
+  .featuresGrid{
+    display:grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+  }
+  @media (max-width: 1100px){
+    .featuresGrid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 520px){
+    .featuresGrid{ grid-template-columns: 1fr; }
+  }
+  .pill{
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(255,255,255,.06);
+    padding: 16px 14px;
+  }
+  .pill strong{ display:block; font-size: 14px; margin-bottom: 6px; }
+  .pill span{ font-size: 13px; color: rgba(255,255,255,.65); }
 
-      .reveal.delay-2 {
-        animation-delay: 0.4s;
-      }
+  /* Testimonials marquee */
+  .marquee{
+    overflow:hidden;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,.14);
+    background: rgba(0,0,0,.18);
+    padding: 12px 0;
+  }
+  .track{
+    display:flex;
+    gap: 14px;
+    width:max-content;
+    padding: 0 14px;
+    animation: scroll 22s linear infinite;
+  }
+  .marquee:hover .track{ animation-play-state: paused; }
+  @keyframes scroll{
+    from{ transform: translateX(0); }
+    to{ transform: translateX(-50%); }
+  }
 
-      @keyframes reveal {
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <main class="page">
-      <header>
-        <div class="reveal">
-          <span class="badge">Project Showcase</span>
-          <h1 class="title">Replace this title with your project name.</h1>
-          <p class="subtitle">
-            A short, punchy description that explains what the project does and
-            why it matters. Keep it to 1–2 sentences.
-          </p>
-          <div class="actions">
-            <a class="button" href="#">Live Demo</a>
-            <a class="button secondary" href="#">Source Code</a>
-          </div>
-        </div>
-        <div class="hero-card reveal delay-1">
-          <strong>Hero Area</strong>
-          <p>
-            Drop a screenshot, mockup, or gif here. For now, use this space to
-            outline what the user should notice first.
-          </p>
-          <div class="grid">
-            <div class="panel">
-              <h3>Problem</h3>
-              <p>What pain point sparked the build?</p>
-            </div>
-            <div class="panel">
-              <h3>Solution</h3>
-              <p>How does your project solve it?</p>
-            </div>
-          </div>
-        </div>
-      </header>
+  .tVid{
+    width: 240px;
+    height: 135px;
+    border-radius: 14px;
+    overflow:hidden;
+    border: 1px solid rgba(255,255,255,.14);
+    background: rgba(255,255,255,.06);
+    box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    flex: 0 0 auto;
+  }
+  .tVid video{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    display:block;
+    background: #0b0c10;
+  }
 
-      <section class="grid reveal delay-2">
-        <div class="panel">
-          <h3>Key Feature One</h3>
-          <p>Explain the most impressive capability in one sentence.</p>
-        </div>
-        <div class="panel">
-          <h3>Key Feature Two</h3>
-          <p>Highlight performance, speed, or uniqueness here.</p>
-        </div>
-        <div class="panel">
-          <h3>Key Feature Three</h3>
-          <p>Finish with something measurable or delightful.</p>
+  /* Contact */
+  .contactGrid{
+    display:grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  @media (max-width: 980px){
+    .contactGrid{ grid-template-columns: 1fr; }
+  }
+  .field{
+    display:flex;
+    flex-direction:column;
+    gap: 6px;
+  }
+  label{ color: rgba(255,255,255,.72); font-size: 13px; }
+  input, textarea{
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,.14);
+    background: rgba(0,0,0,.22);
+    color: var(--text);
+    padding: 12px 12px;
+    outline: none;
+  }
+  textarea{ min-height: 120px; resize: vertical; }
+  input:focus, textarea:focus{ border-color: rgba(81,136,180,.55); }
+
+  footer{
+    margin-top: 18px;
+    display:flex;
+    justify-content: space-between;
+    gap: 12px;
+    color: rgba(255,255,255,.55);
+    font-size: 12px;
+  }
+</style>
+</head>
+
+<body>
+  <div class="bg"></div>
+  <div class="vignette"></div>
+
+  <main class="wrap">
+    <header>
+      <nav class="nav">
+        <a href="#concept">Concept</a>
+        <a href="#features">Features</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="card hero">
+      <div class="badge">Project Showcase</div>
+      <h1>AI Calling Agent for Kingston City Hall</h1>
+      <p class="sub">
+        24/7 multilingual support + consistent city knowledge base answers + analytics pipeline.
+      </p>
+    </section>
+
+    <!-- Row: Demo conversation + Call demo (equal columns) -->
+    <section class="row2">
+      <section class="card pad">
+        <div class="kicker">Demo AI Conversation</div>
+        <p class="desc">Placeholder audio clip</p>
+        <div class="audioBox">
+          <audio controls preload="metadata">
+            <source src="demo_conversation.mp3" type="audio/mpeg" />
+          </audio>
         </div>
       </section>
 
-      <footer>
-        <span>Built by You — 2024</span>
-        <span>Replace with contact or socials</span>
-      </footer>
-    </main>
-  </body>
+      <section class="card pad">
+        <div class="kicker">Try AI Calling Demo</div>
+        <p class="desc">Click to call the demo line</p>
+        <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+          <div style="padding:10px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.18);font-weight:750;">
+            📞 +1 (365)-364-2905
+          </div>
+          <a class="btn primary" href="tel:+13653642905">Call Now</a>
+        </div>
+      </section>
+    </section>
+
+    <!-- Concept video -->
+    <section id="concept" class="card pad" style="margin-top:16px;">
+      <div class="kicker">Concept Video</div>
+      <p class="desc">Embed YouTube/Vimeo, or swap to local MP4 later.</p>
+      <div class="frame">
+        <iframe
+          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+          title="Concept video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <!-- Key features -->
+    <section id="features" class="card pad" style="margin-top:16px;">
+      <div class="kicker">Key Features</div>
+
+      <div class="featuresGrid">
+        <div class="pill"><strong>24/7 AI Support</strong><span>Always-on answers.</span></div>
+        <div class="pill"><strong>Voice + Text</strong><span>Call + chat compatible.</span></div>
+        <div class="pill"><strong>Multilingual</strong><span>EN/FR/HI/ES and more.</span></div>
+        <div class="pill"><strong>Knowledge Base Driven</strong><span>Approved sources only.</span></div>
+        <div class="pill"><strong>Analytics Funnel</strong><span>Trends + pain points.</span></div>
+        <div class="pill"><strong>After-hours Coverage</strong><span>Evenings/weekends.</span></div>
+        <div class="pill"><strong>Consistent Answers</strong><span>Reduced variance.</span></div>
+        <div class="pill"><strong>Secure Storage</strong><span>Audio + transcript.</span></div>
+      </div>
+    </section>
+
+    <!-- Software Architecture -->
+    <section id="architecture" class="card pad" style="margin-top:16px;">
+      <div class="kicker">Software Architecture</div>
+      <p class="desc">Drop an architecture diagram (image) or an embedded diagram link here.</p>
+
+      <div class="frame" style="aspect-ratio: 21/9;">
+        <iframe
+          src="about:blank"
+          title="Architecture placeholder"
+          style="background: rgba(0,0,0,.22);"></iframe>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="card pad" style="margin-top:16px;">
+      <div class="kicker">Testimonials</div>
+      <p class="desc">Small videos only; they float until hovered (hover pauses + videos stop).</p>
+
+      <div class="marquee" id="marquee">
+        <div class="track" id="track">
+          <!-- A (duplicate to loop seamlessly) -->
+          <div class="tVid"><video class="tv" autoplay muted loop playsinline preload="metadata"><source src="t1.mp4" type="video/mp4"></video></div>
+          <div class="tVid"><video class="tv" autoplay muted loop playsinline preload="metadata"><source src="t2.mp4" type="video/mp4"></video></div>
+          <div class="tVid"><video class="tv" autoplay muted loop playsinline preload="metadata"><source src="t3.mp4" type="video/mp4"></video></div>
+          <div class="tVid"><video class="tv" autoplay muted loop playsinline preload="metadata"><source src="t4.mp4" type="video/mp4"></video></div>
+          <div class="tVid"><video class="tv" autoplay muted loop playsinline preload="metadata"><source src="t5.mp4" type="video/mp4"></video></div>
+
+          <!-- B -->
+          <div class="tVid"><video class="tv" autoplay muted loop playsinline preload="metadata"><source src="t1.mp4" type="video/mp4"></video></div>
+          <div class="tVid"><video class="tv" autoplay muted loop playsinline preload="metadata"><source src="t2.mp4" type="video/mp4"></video></div>
+          <div class="tVid"><video class="tv" autoplay muted loop playsinline preload="metadata"><source src="t3.mp4" type="video/mp4"></video></div>
+          <div class="tVid"><video class="tv" autoplay muted loop playsinline preload="metadata"><source src="t4.mp4" type="video/mp4"></video></div>
+          <div class="tVid"><video class="tv" autoplay muted loop playsinline preload="metadata"><source src="t5.mp4" type="video/mp4"></video></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+<section id="contact" class="card pad" style="margin-top:16px;">
+  <div class="kicker">Contacts</div>
+
+  <div class="row2" style="margin-top:12px;">
+    <div class="pill">
+      <strong>Niket Kakkar</strong>
+      <span>
+        <a href="https://www.linkedin.com/in/niketkakkar/"
+           target="_blank" rel="noopener noreferrer"
+           style="color:rgba(255,255,255,.85);text-decoration:none;">
+          LinkedIn
+        </a>
+      </span>
+    </div>
+
+    <div class="pill">
+      <strong>Gunin Singh</strong>
+      <span>
+        <a href="https://www.linkedin.com/in/gunin-singh-415426226/"
+           target="_blank" rel="noopener noreferrer"
+           style="color:rgba(255,255,255,.85);text-decoration:none;">
+          LinkedIn
+        </a>
+      </span>
+    </div>
+
+    <div class="pill">
+      <strong>Utkarsh Verma</strong>
+      <span>
+        <a href="https://www.linkedin.com/in/utk-verma/"
+           target="_blank" rel="noopener noreferrer"
+           style="color:rgba(255,255,255,.85);text-decoration:none;">
+          LinkedIn
+        </a>
+      </span>
+    </div>
+
+    <div class="pill">
+      <strong>Alankrit</strong>
+      <span>
+        <a href="https://www.linkedin.com/in/alankrit019/"
+           target="_blank" rel="noopener noreferrer"
+           style="color:rgba(255,255,255,.85);text-decoration:none;">
+          LinkedIn
+        </a>
+      </span>
+    </div>
+  </div>
+</section>
+
+
+
+    <footer>
+      <div>Built by Niket — 2026</div>
+    </footer>
+  </main>
+
+<script>
+  // Pause video playback on hover of the testimonials container, resume on leave.
+  const marquee = document.getElementById('marquee');
+  const vids = () => marquee.querySelectorAll('video.tv');
+
+  marquee.addEventListener('mouseenter', () => {
+    vids().forEach(v => { try { v.pause(); } catch(e){} });
+  });
+
+  marquee.addEventListener('mouseleave', () => {
+    vids().forEach(v => {
+      v.muted = true;
+      const p = v.play();
+      if (p && p.catch) p.catch(()=>{});
+    });
+  });
+</script>
+</body>
 </html>
