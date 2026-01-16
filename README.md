@@ -23,6 +23,7 @@
 ## Run / Preview
 - Open `index.html` directly in a browser, or serve the folder with a static server.
 - For the dashboard, open `dashboard_upgrade.php` through a PHP-capable server.
+- Or run the following Vercel page: `https://kinley-city-bot.vercel.app/#`.
 
 ## Notes
 - Media paths are expected under `Images/` and `Videos/` (see `index.html`).
