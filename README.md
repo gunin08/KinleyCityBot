@@ -1,9 +1,7 @@
 # Kinley City Bot
 
 ## Overview
-- Single-page showcase site for the Kingston City Hall AI calling agent.
-- Includes live dashboard link, demo audio, concept video, architecture image, and testimonial videos.
-- Companion PHP dashboard for call sessions and KPIs.
+Kinley City Bot is a 24/7 AI calling agent and analytics system for Kingston City Hall that answers resident questions from approved city knowledge, supports multilingual callers, and turns call recordings into structured insights for staff.
 
 ## Project Structure
 - **index.html** – main marketing/showcase page.
