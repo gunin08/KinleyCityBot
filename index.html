@@ -97,7 +97,19 @@
     padding: 10px 0 18px;
     color: rgba(255,255,255,.74);
   }
-  header .brand{ font-weight: 820; letter-spacing:.02em; }
+  header .brand{
+    display:flex;
+    align-items:center;
+    gap: 10px;
+    font-weight: 820;
+    letter-spacing:.02em;
+  }
+  header .brand img{
+    height: 36px;
+    width: auto;
+    display:block;
+    filter: drop-shadow(0 6px 14px rgba(0,0,0,.25));
+  }
   header a{ color:inherit; text-decoration:none; }
   .nav{ display:flex; gap:14px; align-items:center; }
   .nav a{ opacity:.9; }
@@ -359,6 +371,10 @@
 
   <main class="wrap">
     <header>
+      <div class="brand">
+        <img src="kingston-logo.png" alt="Kingston logo" />
+        <img src="queens-logo.png" alt="Queen's logo" />
+      </div>
       <nav class="nav">
         <a href="#concept">Concept</a>
         <a href="#features">Features</a>
