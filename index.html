@@ -305,16 +305,20 @@
   .track{
     display:flex;
     gap: 14px;
-    width:max-content;
+    width:100%;
+    flex-wrap: wrap;
+    justify-content: center;
     padding: 0 14px;
-    animation: scroll 22s linear infinite;
-  }
-  .marquee:hover .track{ animation-play-state: paused; }
-  @keyframes scroll{
-    from{ transform: translateX(0); }
-    to{ transform: translateX(-50%); }
+    animation: none;
   }
 
+  .tVidCard{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex: 0 0 auto;
+  }
   .tVid{
     width: 240px;
     height: 135px;
@@ -325,12 +329,33 @@
     box-shadow: 0 10px 30px rgba(0,0,0,.35);
     flex: 0 0 auto;
   }
+  .tVid.placeholder{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color: rgba(255,255,255,.5);
+    font-size: 13px;
+    letter-spacing: 0.6px;
+  }
   .tVid video{
     width:100%;
     height:100%;
     object-fit: cover;
     display:block;
     background: #0b0c10;
+    cursor: pointer;
+  }
+  .vid-label{
+    min-width: 120px;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.78);
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.18);
+    background: rgba(0,0,0,.22);
+    padding: 6px 12px;
   }
 
   /* Contact */
@@ -485,19 +510,30 @@
 
       <div class="marquee" id="marquee">
         <div class="track" id="track">
-          <!-- A (duplicate to loop seamlessly) -->
-          <div class="tVid"><video class="tv" autoplay muted loop playsinline preload="metadata"><source src="chinese.mp4" type="video/mp4"></video></div>
-          <div class="tVid"><video class="tv" autoplay muted loop playsinline preload="metadata"><source src="french.mp4" type="video/mp4"></video></div>
-          <div class="tVid"><video class="tv" autoplay muted loop playsinline preload="metadata"><source src="t3.mp4" type="video/mp4"></video></div>
-          <div class="tVid"><video class="tv" autoplay muted loop playsinline preload="metadata"><source src="t4.mp4" type="video/mp4"></video></div>
-          <div class="tVid"><video class="tv" autoplay muted loop playsinline preload="metadata"><source src="t5.mp4" type="video/mp4"></video></div>
-
-          <!-- B -->
-          <div class="tVid"><video class="tv" autoplay muted loop playsinline preload="metadata"><source src="t1.mp4" type="video/mp4"></video></div>
-          <div class="tVid"><video class="tv" autoplay muted loop playsinline preload="metadata"><source src="t2.mp4" type="video/mp4"></video></div>
-          <div class="tVid"><video class="tv" autoplay muted loop playsinline preload="metadata"><source src="t3.mp4" type="video/mp4"></video></div>
-          <div class="tVid"><video class="tv" autoplay muted loop playsinline preload="metadata"><source src="t4.mp4" type="video/mp4"></video></div>
-          <div class="tVid"><video class="tv" autoplay muted loop playsinline preload="metadata"><source src="t5.mp4" type="video/mp4"></video></div>
+          <div class="tVidCard">
+            <div class="tVid">
+              <video class="tv" controls playsinline preload="metadata">
+                <source src="chinese.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="vid-label">Chinese</div>
+          </div>
+          <div class="tVidCard">
+            <div class="tVid">
+              <video class="tv" controls playsinline preload="metadata">
+                <source src="french.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="vid-label">French</div>
+          </div>
+          <div class="tVidCard">
+            <div class="tVid placeholder">Empty</div>
+            <div class="vid-label">Empty</div>
+          </div>
+          <div class="tVidCard">
+            <div class="tVid placeholder">Empty</div>
+            <div class="vid-label">Empty</div>
+          </div>
         </div>
       </div>
     </section>
@@ -541,19 +577,16 @@
   </main>
 
 <script>
-  // Pause video playback on hover of the testimonials container, resume on leave.
-  const marquee = document.getElementById('marquee');
-  const vids = () => marquee.querySelectorAll('video.tv');
-
-  marquee.addEventListener('mouseenter', () => {
-    vids().forEach(v => { try { v.pause(); } catch(e){} });
-  });
-
-  marquee.addEventListener('mouseleave', () => {
-    vids().forEach(v => {
-      v.muted = true;
-      const p = v.play();
-      if (p && p.catch) p.catch(()=>{});
+  document.querySelectorAll('video.tv').forEach((video) => {
+    video.addEventListener('click', () => {
+      if (document.fullscreenElement) {
+        return;
+      }
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.webkitEnterFullscreen) {
+        video.webkitEnterFullscreen();
+      }
     });
   });
 </script>
